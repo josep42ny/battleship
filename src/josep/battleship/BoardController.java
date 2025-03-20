@@ -11,4 +11,7 @@ public class BoardController {
         }
     }
 
+    public Board getBoards(int index) {
+        return boards[index];
+    }
 }

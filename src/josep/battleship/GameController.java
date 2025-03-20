@@ -12,7 +12,7 @@ public class GameController {
     }
 
     private void update() {
-
+        new View().drawBoard(boardController.getBoards(0));
     }
 
 }
