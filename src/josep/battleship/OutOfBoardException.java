@@ -1,7 +1,11 @@
 package josep.battleship;
 
-public class ColumnParsingException extends RuntimeException {
-    public ColumnParsingException(String message) {
+public class OutOfBoardException extends RuntimeException {
+    public OutOfBoardException() {
+
+    }
+
+    public OutOfBoardException(String message) {
         super(message);
     }
 }
