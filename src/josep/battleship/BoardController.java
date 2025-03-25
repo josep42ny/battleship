@@ -3,6 +3,7 @@ package josep.battleship;
 public class BoardController {
 
     Board[] boards;
+    int current = 0;
 
     BoardController(int boardAmount) {
         boards = new Board[boardAmount];
@@ -11,7 +12,13 @@ public class BoardController {
         }
     }
 
-    public Board getBoards(int index) {
-        return boards[index];
+    public Board nextBoard() {
+        current = (current + 1) % boards.length;
+        return boards[current];
     }
+
+    public void revealTile(int[] coords) {
+        boards[current].reveal(coords);
+    }
+
 }

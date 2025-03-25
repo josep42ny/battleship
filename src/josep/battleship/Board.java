@@ -5,12 +5,14 @@ public class Board {
     private int columns;
     private int rows;
     private final Tile[][] tiles;
+    private final boolean[][] visible;
 
 
     public Board(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
         this.tiles = new Tile[rows][columns];
+        this.visible = new boolean[rows][columns];
 
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < columns; column++) {
@@ -36,6 +38,13 @@ public class Board {
     }
 
     public Tile getTile(int row, int column) {
-        return tiles[row][column];
+        if (visible[row][column]) {
+            return tiles[row][column];
+        }
+        return Tile.FOG;
+    }
+
+    public void reveal(int[] coords) {
+        visible[coords[0]][coords[1]] = true;
     }
 }

@@ -2,6 +2,7 @@ package josep.battleship;
 
 public enum Tile {
 
+    FOG(0, "▓▓"),
     WATER(0, "░░"),
     CARRIER(5, "▀▄"),
     BATTLESHIP(4, "▀▄"),
