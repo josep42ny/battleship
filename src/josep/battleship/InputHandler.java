@@ -2,37 +2,37 @@ package josep.battleship;
 
 public class InputHandler {
 
-    public int[] ask () {
-        int[] coords = new int[2];
-        int number;
-        char letter;
-
+    public int[] ask() {
         String in;
-        int abc = 0;
-        int abcd = 0;
-        System.out.println();
 
-        // fixme
-        do {
-            do {
-                System.out.print("\033[F\033[2K");
-                System.out.flush();
-                in = System.console().readLine("Enter play [a-j][1-10]: ");
-            } while (in.length() != 3 && in.length() != 2);
+        while (true) {
+            in = System.console().readLine("Enter play [a-j][1-10]: ");
 
+            if (in.isEmpty()) {
+                Ansi.clearLine();
+                continue;
+            }
 
             try {
-                abc = Integer.parseInt(in.substring(1));
-            } catch (NumberFormatException nfe) {};
-            abc--;
+                return parseCoords(in);
+            } catch (NumberFormatException | OutOfBoardException e) {
+                Ansi.clearLine();
+            }
+        }
+    }
 
-            abcd = in.charAt(0) - 97;
+    private int[] parseCoords(String text) throws NumberFormatException, OutOfBoardException {
+        int[] out = new int[2];
+        int row = Integer.parseInt(text.substring(1)) - 1;
+        int column = text.charAt(0) - 97;
 
-            System.out.println(abc);
-            System.out.println(abcd);
-        } while ((abc < 0 || abc > 10) || (abcd < 0 || abcd > 10));
+        if (row < 0 || row > 10 || column < 0 || column > 10) {
+            throw new OutOfBoardException();
+        }
 
-        return coords;
+        out[0] = row;
+        out[1] = column;
+        return out;
     }
 
 }
