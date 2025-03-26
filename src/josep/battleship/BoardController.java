@@ -21,4 +21,8 @@ public class BoardController {
         boards[current].reveal(coords);
     }
 
+    public boolean isTileVisible(int[] coords) {
+        return boards[current].isTileVisible(coords);
+    }
+
 }

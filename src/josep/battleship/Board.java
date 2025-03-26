@@ -47,4 +47,9 @@ public class Board {
     public void reveal(int[] coords) {
         visible[coords[0]][coords[1]] = true;
     }
+
+    public boolean isTileVisible(int[] coords) {
+        return visible[coords[0]][coords[1]];
+    }
+
 }

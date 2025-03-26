@@ -15,14 +15,19 @@ public class GameController {
 
     private void update() {
         while (true) {
-            // todo
-            Board current = boardController.nextBoard();
-            view.drawBoard(current);
-            int[] coords = inputHandler.ask();
-
+            Board board = boardController.nextBoard();
+            view.drawBoard(board);
+            int[] coords;
+            while (true) {
+                coords = inputHandler.ask();
+                if (!boardController.isTileVisible(coords)) {
+                    break;
+                }
+                Ansi.clearLine();
+            }
             boardController.revealTile(coords);
-            view.drawBoard(current);
         }
     }
+
 
 }
