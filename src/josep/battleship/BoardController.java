@@ -2,13 +2,14 @@ package josep.battleship;
 
 public class BoardController {
 
+    private final String[] colors = new String[]{Ansi.RED, Ansi.BLUE};
     private Board[] boards;
     private int current = 0;
 
     BoardController(int boardAmount) {
         boards = new Board[boardAmount];
         for (int i = 0; i < boardAmount; i++) {
-            boards[i] = new Board();
+            boards[i] = new Board(colors[i % colors.length]);
         }
     }
 

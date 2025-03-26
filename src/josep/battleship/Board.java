@@ -4,11 +4,12 @@ public class Board {
 
     private int columns;
     private int rows;
+    private final String color;
     private final Tile[][] tiles;
     private final boolean[][] visible;
 
-
-    public Board(int rows, int columns) {
+    public Board(int rows, int columns, String color) {
+        this.color = color;
         this.rows = rows;
         this.columns = columns;
         this.tiles = new Tile[rows][columns];
@@ -33,8 +34,8 @@ public class Board {
         }
     }
 
-    public Board() {
-        this(10, 10);
+    public Board(String color) {
+        this(10, 10, color);
     }
 
     public int getColumns() {
@@ -52,6 +53,13 @@ public class Board {
         return Tile.FOG;
     }
 
+    public Tile getTrueTile(int row, int column) {
+        if (!visible[row][column]) {
+            return tiles[row][column];
+        }
+        return (tiles[row][column] == Tile.WATER) ? Tile.MISS : Tile.HIT;
+    }
+
     public void reveal(int[] coords) {
         visible[coords[0]][coords[1]] = true;
     }
@@ -60,4 +68,7 @@ public class Board {
         return visible[coords[0]][coords[1]];
     }
 
+    public String getColor() {
+        return color;
+    }
 }

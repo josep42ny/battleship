@@ -3,12 +3,14 @@ package josep.battleship;
 public enum Tile {
 
     FOG(0, "▓▓"),
-    WATER(0, "░░"),
-    CARRIER(5, "▀▄"),
-    BATTLESHIP(4, "▀▄"),
-    CRUISER(3, "▀▄"),
-    SUBMARINE(3, "▀▄"),
-    DESTROYER(2, "▀▄");
+    HIT(0, "▀▄"),
+    MISS(0, "XX"),
+    WATER(0, "▒▒"),
+    CARRIER(5, "██"),
+    BATTLESHIP(4, "██"),
+    CRUISER(3, "██"),
+    SUBMARINE(3, "██"),
+    DESTROYER(2, "██");
 
     private final String symbol;
     private final int size;
