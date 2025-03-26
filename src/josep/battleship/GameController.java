@@ -15,8 +15,10 @@ public class GameController {
 
     private void update() {
         while (true) {
-            Board board = boardController.nextBoard();
-            view.drawBoard(board);
+            view.drawPlayerSwitch();
+            Board player = boardController.currentBoard();
+            Board opponent = boardController.nextBoard();
+            view.drawBoards(opponent, player);
             int[] coords;
             while (true) {
                 coords = inputHandler.ask();

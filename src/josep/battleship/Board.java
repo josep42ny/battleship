@@ -19,10 +19,18 @@ public class Board {
                 this.tiles[row][column] = Tile.WATER;
             }
         }
+        placeShip(Tile.CARRIER, 1, 1, new int[]{1, 0});
+    }
 
-        tiles[3][2] = Tile.DESTROYER;
-        tiles[3][3] = Tile.DESTROYER;
+    public void placeShip(Tile type, int row, int col, int[] direction) {
+        int rowOffset = direction[0];
+        int colOffset = direction[1];
 
+        for (int i = 0; i < type.getSize(); i++) {
+            tiles[row][col] = type;
+            row += rowOffset;
+            col += colOffset;
+        }
     }
 
     public Board() {

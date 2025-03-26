@@ -2,8 +2,8 @@ package josep.battleship;
 
 public class BoardController {
 
-    Board[] boards;
-    int current = 0;
+    private Board[] boards;
+    private int current = 0;
 
     BoardController(int boardAmount) {
         boards = new Board[boardAmount];
@@ -25,4 +25,7 @@ public class BoardController {
         return boards[current].isTileVisible(coords);
     }
 
+    public Board currentBoard() {
+        return boards[current];
+    }
 }
