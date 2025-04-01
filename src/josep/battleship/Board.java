@@ -1,5 +1,9 @@
 package josep.battleship;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 public class Board {
 
     private int columns;
@@ -7,6 +11,14 @@ public class Board {
     private final String color;
     private final Tile[][] tiles;
     private final boolean[][] visible;
+    private Random random;
+    private static final Map<Tile, Integer> shipAmounts = new HashMap<>() {{
+        put(Tile.CARRIER, 1);
+        put(Tile.BATTLESHIP, 2);
+        put(Tile.CRUISER, 3);
+        put(Tile.SUBMARINE, 4);
+        put(Tile.DESTROYER, 5);
+    }};
 
     public Board(int rows, int columns, String color) {
         this.color = color;
@@ -23,7 +35,15 @@ public class Board {
         placeShip(Tile.CARRIER, 1, 1, new int[]{1, 0});
     }
 
-    public void placeShip(Tile type, int row, int col, int[] direction) {
+    public void placeAllShips() {
+        for (Tile a : shipAmounts.keySet()) {
+            if (random.nextBoolean()) {
+                // fixme placeShip(shipAmounts.get(a));
+            }
+        }
+    }
+
+    private void placeShip(Tile type, int row, int col, int[] direction) {
         int rowOffset = direction[0];
         int colOffset = direction[1];
 
