@@ -29,4 +29,9 @@ public class BoardController {
     public Board currentBoard() {
         return boards[current];
     }
+
+    public boolean haveAllSank() {
+        return boards[current].haveAllSank();
+    }
+
 }

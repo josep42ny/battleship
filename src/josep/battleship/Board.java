@@ -71,4 +71,16 @@ public class Board {
     public String getColor() {
         return color;
     }
+
+    public boolean haveAllSank() {
+        for (int row = 0; row < tiles.length; row++) {
+            for (int column = 0; column < tiles[row].length; column++) {
+                if (tiles[row][column] != Tile.WATER && !visible[row][column]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }

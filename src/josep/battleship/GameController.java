@@ -28,8 +28,17 @@ public class GameController {
                 Ansi.clearLine();
             }
             boardController.revealTile(coords);
+            if (opponent.haveAllSank()) {
+                gameover();
+            }
         }
     }
 
+    private void gameover() {
+        Board player = boardController.currentBoard();
+        Board opponent = boardController.nextBoard();
+        view.drawBoards(player, opponent);
+        System.exit(0);
+    }
 
 }

@@ -3,7 +3,7 @@ package josep.battleship;
 public enum Tile {
 
     FOG(0, "▓▓"),
-    HIT(0, Ansi.paint("╳╳", Ansi.BG_BRIGHT_BLACK + Ansi.FG_BRIGHT_RED + Ansi.BOLD)),
+    HIT(0, Ansi.paint("╺╸", Ansi.BG_BRIGHT_BLACK + Ansi.FG_BRIGHT_RED + Ansi.BOLD)),
     MISS(0, Ansi.paint("╺╸", Ansi.BG_BRIGHT_BLUE + Ansi.FG_BRIGHT_WHITE)),
     WATER(0, Ansi.paint("  ", Ansi.BG_BRIGHT_BLUE)),
     CARRIER(5, Ansi.paint("  ", Ansi.BG_BRIGHT_BLACK)),
