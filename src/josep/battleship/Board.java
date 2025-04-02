@@ -12,18 +12,13 @@ public class Board {
     private final Tile[][] tiles;
     private final boolean[][] visible;
     private Random random;
-    private static final Map<Tile, Integer> shipAmounts = new HashMap<>() {{
-        put(Tile.CARRIER, 1);
-        put(Tile.BATTLESHIP, 2);
-        put(Tile.CRUISER, 3);
-        put(Tile.SUBMARINE, 4);
-        put(Tile.DESTROYER, 5);
-    }};
+    private static final Tile[] shipAmounts = new Tile[]{Tile.CARRIER, Tile.BATTLESHIP, Tile.CRUISER, Tile.SUBMARINE, Tile.DESTROYER};
 
     public Board(int rows, int columns, String color) {
         this.color = color;
         this.rows = rows;
         this.columns = columns;
+        this.random = new Random();
         this.tiles = new Tile[rows][columns];
         this.visible = new boolean[rows][columns];
 
@@ -32,25 +27,41 @@ public class Board {
                 this.tiles[row][column] = Tile.WATER;
             }
         }
-        placeShip(Tile.CARRIER, 1, 1, new int[]{1, 0});
+        placeAllShips();
     }
 
     public void placeAllShips() {
-        for (Tile a : shipAmounts.keySet()) {
-            if (random.nextBoolean()) {
-                // fixme placeShip(shipAmounts.get(a));
+        for (Tile ship : shipAmounts) {
+            while (true) {
+                try {
+                    placeShip(ship, random.nextBoolean());
+                    break;
+                } catch (InvalidTileException e) {
+
+                }
             }
         }
     }
 
-    private void placeShip(Tile type, int row, int col, int[] direction) {
-        int rowOffset = direction[0];
-        int colOffset = direction[1];
+    private void placeShip(Tile type, boolean vertical) throws InvalidTileException {
+        int shipLength = type.getSize();
 
-        for (int i = 0; i < type.getSize(); i++) {
+        int rowBound = vertical ? rows - shipLength - 1 : rows - 1;
+        int colBound = vertical ? columns - 1 : columns - shipLength - 1;
+
+        int row = random.nextInt(rowBound);
+        int col = random.nextInt(colBound);
+
+        for (int i = 0; i < shipLength; i++) {
+            if (tiles[row][col] != Tile.WATER) {
+                throw new InvalidTileException();
+            }
+        }
+
+        for (int i = 0; i < shipLength; i++) {
             tiles[row][col] = type;
-            row += rowOffset;
-            col += colOffset;
+            row += vertical ? 1 : 0;
+            col += vertical ? 0 : 1;
         }
     }
 
@@ -68,7 +79,7 @@ public class Board {
 
     public Tile getTile(int row, int column) {
         if (visible[row][column]) {
-            return tiles[row][column];
+            return tiles[row][column] == Tile.WATER ? Tile.MISS : Tile.HIT;
         }
         return Tile.FOG;
     }

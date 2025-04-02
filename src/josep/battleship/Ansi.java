@@ -14,6 +14,12 @@ public class Ansi {
     public static String BG_BRIGHT_BLUE = "\033[104m";
     public static String FG_BRIGHT_RED = "\033[91m";
     public static String FG_BRIGHT_WHITE = "\033[97m";
+    public static String BG_GREEN = "\033[42m";
+    public static String BG_YELLOW = "\033[43m";
+    public static String BG_BLUE = "\033[44m";
+    public static String BG_PURPLE = "\033[45m";
+    public static String BG_CYAN = "\033[46m";
+    public static String BG_WHITE = "\033[47m";
 
     public static void clearLine() {
         System.out.print(CURSOR_UP);
